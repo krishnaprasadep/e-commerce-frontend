@@ -1,0 +1,285 @@
+<div class="ecom-container">
+    <!-- Header -->
+    <mat-toolbar color="primary" class="app-header">
+      <div class="header-container">
+        <button mat-icon-button (click)="sidenav.toggle()" class="menu-button">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span class="logo" routerLink="/">ShopMart</span>
+        <div class="search-container">
+          <mat-form-field appearance="outline" class="search-field">
+            <mat-label>Search products</mat-label>
+            <input matInput type="text" />
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="header-actions">
+          <button mat-icon-button aria-label="User account">
+            <mat-icon>person</mat-icon>
+          </button>
+          <button mat-icon-button aria-label="Wishlist">
+            <mat-icon>favorite</mat-icon>
+          </button>
+          <button mat-icon-button aria-label="Shopping cart" class="cart-button">
+            <mat-icon>shopping_cart</mat-icon>
+            <span class="cart-badge">3</span>
+          </button>
+        </div>
+      </div>
+    </mat-toolbar>
+  
+    <!-- Sidenav -->
+    <mat-sidenav-container class="sidenav-container">
+      <mat-sidenav #sidenav mode="over" class="sidenav">
+        <mat-nav-list>
+          <h3 matSubheader>Categories</h3>
+          <a mat-list-item routerLink="/">
+            <mat-icon matListItemIcon>home</mat-icon>
+            <span>Home</span>
+          </a>
+          <a mat-list-item routerLink="/category/electronics">
+            <mat-icon matListItemIcon>devices</mat-icon>
+            <span>Electronics</span>
+          </a>
+          <a mat-list-item routerLink="/category/clothing">
+            <mat-icon matListItemIcon>checkroom</mat-icon>
+            <span>Clothing</span>
+          </a>
+          <a mat-list-item routerLink="/category/books">
+            <mat-icon matListItemIcon>menu_book</mat-icon>
+            <span>Books</span>
+          </a>
+          <a mat-list-item routerLink="/category/home">
+            <mat-icon matListItemIcon>weekend</mat-icon>
+            <span>Home & Kitchen</span>
+          </a>
+          <mat-divider></mat-divider>
+          <h3 matSubheader>Account</h3>
+          <a mat-list-item routerLink="/account">
+            <mat-icon matListItemIcon>person</mat-icon>
+            <span>My Account</span>
+          </a>
+          <a mat-list-item routerLink="/orders">
+            <mat-icon matListItemIcon>shopping_bag</mat-icon>
+            <span>My Orders</span>
+          </a>
+          <a mat-list-item routerLink="/wishlist">
+            <mat-icon matListItemIcon>favorite</mat-icon>
+            <span>Wishlist</span>
+          </a>
+        </mat-nav-list>
+      </mat-sidenav>
+  
+      <mat-sidenav-content class="content-container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+          <mat-card class="hero-card">
+            <img
+              mat-card-image
+              src="https://picsum.photos/1200/400"
+              alt="Shop banner"
+            />
+            <div class="hero-overlay">
+              <h1>Summer Sale</h1>
+              <h2>Up to 50% off on selected items</h2>
+              <button mat-raised-button color="accent">Shop Now</button>
+            </div>
+          </mat-card>
+        </div>
+  
+        <!-- Featured Categories -->
+        <div class="section">
+          <h2 class="section-title">Featured Categories</h2>
+          <div class="categories-grid">
+            <mat-card class="category-card" *ngFor="let category of categories">
+              <img
+                mat-card-image
+                [src]="'https://picsum.photos/300/200'"
+                [alt]="category.name"
+              />
+              <mat-card-content>
+                <h3>{{ category.name }}</h3>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-button color="primary">Explore</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
+  
+        <!-- New Arrivals Section -->
+        <div class="section">
+          <h2 class="section-title">New Arrivals</h2>
+          <div class="products-carousel">
+            <button mat-icon-button class="carousel-control prev">
+              <mat-icon>chevron_left</mat-icon>
+            </button>
+            <div class="carousel-content">
+              <mat-card class="product-card" *ngFor="let product of newArrivals">
+                <div class="product-image-container">
+                  <img
+                    mat-card-image
+                    [src]="'https://picsum.photos/200/200'"
+                    [alt]="product.name"
+                  />
+                  <button
+                    mat-mini-fab
+                    color="accent"
+                    class="quick-add-button"
+                    aria-label="Add to cart"
+                  >
+                    <mat-icon>add_shopping_cart</mat-icon>
+                  </button>
+                </div>
+                <mat-card-content>
+                  <h3>{{ product.name }}</h3>
+                  <p class="product-price">{{ product.price | currency }}</p>
+                  <div class="rating">
+                    <mat-icon *ngFor="let star of [1, 2, 3, 4, 5]">
+                      {{ star <= product.rating ? 'star' : 'star_border' }}
+                    </mat-icon>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+            <button mat-icon-button class="carousel-control next">
+              <mat-icon>chevron_right</mat-icon>
+            </button>
+          </div>
+        </div>
+  
+        <!-- Deals Section -->
+        <div class="section deals-section">
+          <h2 class="section-title">Limited Time Deals</h2>
+          <div class="deals-grid">
+            <mat-card class="deal-card" *ngFor="let deal of deals">
+              <mat-card-header>
+                <mat-card-title>{{ deal.name }}</mat-card-title>
+                <mat-card-subtitle>Save {{ deal.discount }}%</mat-card-subtitle>
+              </mat-card-header>
+              <img
+                mat-card-image
+                [src]="'https://picsum.photos/300/200'"
+                [alt]="deal.name"
+              />
+              <mat-card-content>
+                <div class="price-container">
+                  <span class="original-price"
+                    >{{ deal.originalPrice | currency }}</span
+                  >
+                  <span class="current-price"
+                    >{{ deal.currentPrice | currency }}</span
+                  >
+                </div>
+                <mat-progress-bar
+                  mode="determinate"
+                  [value]="deal.stockPercentage"
+                ></mat-progress-bar>
+                <p class="stock-status">
+                  <span *ngIf="deal.stockPercentage < 20" class="low-stock"
+                    >Almost sold out!</span
+                  >
+                  <span *ngIf="deal.stockPercentage >= 20" class="in-stock"
+                    >In stock</span
+                  >
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-raised-button color="primary">Add to Cart</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
+  
+        <!-- Brand Section -->
+        <div class="section">
+          <h2 class="section-title">Top Brands</h2>
+          <div class="brands-container">
+            <div class="brand-logo" *ngFor="let brand of brands">
+              <img
+                [src]="'https://picsum.photos/150/80'"
+                [alt]="brand + ' logo'"
+              />
+            </div>
+          </div>
+        </div>
+  
+        <!-- Newsletter Section -->
+        <div class="newsletter-section">
+          <mat-card>
+            <mat-card-content>
+              <h2>Subscribe to Our Newsletter</h2>
+              <p>Get the latest updates on new products and special sales</p>
+              <div class="newsletter-form">
+                <mat-form-field appearance="outline">
+                  <mat-label>Your Email</mat-label>
+                  <input matInput type="email" placeholder="email@example.com" />
+                </mat-form-field>
+                <button mat-raised-button color="accent">Subscribe</button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+  
+        <!-- Footer -->
+        <footer class="footer">
+          <div class="footer-content">
+            <div class="footer-column">
+              <h3>Shop</h3>
+              <ul>
+                <li><a href="#">New Arrivals</a></li>
+                <li><a href="#">Best Sellers</a></li>
+                <li><a href="#">Deals & Promotions</a></li>
+                <li><a href="#">Clearance</a></li>
+              </ul>
+            </div>
+            <div class="footer-column">
+              <h3>Customer Service</h3>
+              <ul>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Shipping & Returns</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Size Guide</a></li>
+              </ul>
+            </div>
+            <div class="footer-column">
+              <h3>About Us</h3>
+              <ul>
+                <li><a href="#">Our Story</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Store Locator</a></li>
+              </ul>
+            </div>
+            <div class="footer-column">
+              <h3>Follow Us</h3>
+              <div class="social-icons">
+                <button mat-icon-button aria-label="Facebook">
+                  <mat-icon>facebook</mat-icon>
+                </button>
+                <button mat-icon-button aria-label="Instagram">
+                  <mat-icon>instagram</mat-icon>
+                </button>
+                <button mat-icon-button aria-label="Twitter">
+                  <mat-icon>twitter</mat-icon>
+                </button>
+                <button mat-icon-button aria-label="YouTube">
+                  <mat-icon>youtube</mat-icon>
+                </button>
+              </div>
+              <h3>Payment Methods</h3>
+              <div class="payment-icons">
+                <span class="payment-icon">Visa</span>
+                <span class="payment-icon">MC</span>
+                <span class="payment-icon">Amex</span>
+                <span class="payment-icon">PayPal</span>
+              </div>
+            </div>
+          </div>
+          <div class="copyright">
+            <p>&copy; 2025 ShopMart. All rights reserved.</p>
+          </div>
+        </footer>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>

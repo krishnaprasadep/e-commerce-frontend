@@ -1,0 +1,33 @@
+body {
+    margin: 0 !important;
+}
+
+.register-page {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #3f51b5;
+}
+
+.register-full-width {
+    width: 100%;
+}
+
+mat-card-header {
+    margin-bottom: 1rem;
+    justify-content: center;
+}
+
+.register-card {
+    width: 450px;
+}
+
+.register-submit {
+    display: grid;
+    margin-bottom:1rem;
+}
+
+.to-login {
+    display: grid;
+}

@@ -1,0 +1,51 @@
+<div class="login-page">
+<mat-card class="login-card" appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Login</mat-card-title>
+  </mat-card-header>
+  
+  <mat-card-content>
+    <form [formGroup]="loginForm" (ngSubmit)="submitLogin()" class="login-form">
+        <mat-form-field class="login-full-width">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email">
+          @if(f['email'].errors?.['required']) {
+            <mat-error>Email is <strong>required.</strong></mat-error>
+          }
+
+          @if(f['email'].errors?.['email']) {
+            <mat-error>Enter a <strong>valid email</strong> address.</mat-error>
+          }
+        </mat-form-field>
+
+
+        <mat-form-field class="login-full-width">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" type="password">
+            @if(f['password'].errors?.['required']) {
+              <mat-error>Password is <strong>required.</strong></mat-error>
+            }
+
+            @if(f['password'].errors?.['minlength']) {
+              <mat-error>Password must be at least <strong>8 characters</strong> long.</mat-error>
+            }
+        </mat-form-field>
+
+        <div class="forgot-p">
+            <a mat-button href="" >Forgot password ?</a>
+        </div>
+
+        <div class="login-submit">
+            <button type="submit" mat-flat-button color="primary">Login</button>
+        </div>
+        <div class="account">
+            <p>Don't have an account ?</p>
+        </div>
+        <div class="to-register">
+            <button (click)="gotoRegister()" mat-stroked-button color="primary">Register</button>
+        </div>
+    </form>
+  </mat-card-content>
+  
+</mat-card>
+</div>

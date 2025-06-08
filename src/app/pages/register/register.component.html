@@ -1,0 +1,70 @@
+<div class="register-page">
+  <mat-card class="register-card" appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>Register</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form
+        class="register-form"
+        [formGroup]="registerForm"
+        (ngSubmit)="onSubmit()"
+      >
+        <mat-form-field class="register-full-width">
+          <mat-label>First name</mat-label>
+          <input matInput type="text" formControlName="fname" />
+          @if(f['fname'].touched && f['fname'].errors?.['required']) {
+          <mat-error>First name is <strong>required.</strong></mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="register-full-width">
+          <mat-label>Last name</mat-label>
+          <input matInput type="text" formControlName="lname" />
+          @if(f['lname'].touched && f['lname'].errors?.['required']) {
+          <mat-error>Last name is <strong>required.</strong></mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="register-full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" />
+          @if(f['email'].touched && f['email'].errors?.['required']) {
+          <mat-error>Email is <strong>required.</strong></mat-error>
+          } @else if(f['email'].touched && f['email'].errors?.['email']) {
+          <mat-error>Enter a <strong>valid email</strong> address.</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="register-full-width">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" />
+          @if(f['password'].touched && f['password'].errors?.['required']) {
+          <mat-error>Password is <strong>required.</strong></mat-error>
+          } @else if(f['password'].touched &&
+          f['password'].errors?.['minlength']) {
+          <mat-error
+            >Password must be at least
+            <strong>8 characters</strong> long.</mat-error
+          >
+          }
+        </mat-form-field>
+        <mat-form-field class="register-full-width">
+          <mat-label>Confirm password</mat-label>
+          <input matInput type="password" formControlName="cpassword" />
+          @if(f['cpassword'].errors?.['required']) {
+          <mat-error>Confirm password is <strong>required.</strong></mat-error>
+          } @if(registerForm.hasError('notMatching')) {
+          <mat-error>Password not match</mat-error>
+          }
+        </mat-form-field>
+        <div class="register-submit">
+          <button mat-flat-button color="primary">Register</button>
+        </div>
+
+        <div class="to-login">
+          <button (click)="gotoLogin()" mat-stroked-button color="primary">
+            Back to login
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
