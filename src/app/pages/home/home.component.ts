@@ -13,6 +13,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDividerModule } from '@angular/material/divider';
 import { CommonModule, CurrencyPipe } from '@angular/common';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-home',
@@ -38,12 +39,18 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  categories = [
-    { name: 'Electronics', icon: 'devices' },
-    { name: 'Clothing', icon: 'checkroom' },
-    { name: 'Books', icon: 'menu_book' },
-    { name: 'Home & Kitchen', icon: 'weekend' },
-  ];
+  categories: any[] = [];
+
+  constructor(private apiService: ApiService) {
+    this.getCategories();
+  }
+
+  // categories = [
+  //   { name: 'Electronics', icon: 'devices' },
+  //   { name: 'Clothing', icon: 'checkroom' },
+  //   { name: 'Books', icon: 'menu_book' },
+  //   { name: 'Home & Kitchen', icon: 'weekend' },
+  // ];
 
   newArrivals = [
     { name: 'Wireless Earbuds', price: 99.99, rating: 4 },
@@ -85,4 +92,17 @@ export class HomeComponent {
   ];
 
   brands = ['Brand1', 'Brand2', 'Brand3', 'Brand4', 'Brand5', 'Brand6'];
+
+
+  getCategories() {
+    this.apiService.getCategories().subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.categories = res;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
 }

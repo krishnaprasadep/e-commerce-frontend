@@ -2,18 +2,21 @@
     <!-- Header -->
     <mat-toolbar color="primary" class="app-header">
       <div class="header-container">
-        <button mat-icon-button (click)="sidenav.toggle()" class="menu-button">
-          <mat-icon>menu</mat-icon>
-        </button>
-        <span class="logo" routerLink="/">ShopMart</span>
-        <div class="search-container">
-          <mat-form-field appearance="outline" class="search-field">
-            <mat-label>Search products</mat-label>
-            <input matInput type="text" />
-            <mat-icon matSuffix>search</mat-icon>
-          </mat-form-field>
+        <div class="header-left">
+          <button mat-icon-button (click)="sidenav.toggle()" class="menu-button">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <span class="logo" routerLink="/">ShopMart</span>
         </div>
-        <div class="header-actions">
+        <div class="header-center">
+          <div class="search-container">
+            <mat-form-field appearance="outline" class="search-field">
+              <input placeholder="Search products" matInput type="text" />
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="header-right">
           <button mat-icon-button aria-label="User account">
             <mat-icon>person</mat-icon>
           </button>
@@ -90,7 +93,7 @@
         <!-- Featured Categories -->
         <div class="section">
           <h2 class="section-title">Featured Categories</h2>
-          <div class="categories-grid">
+          <div *ngIf="categories" class="categories-grid">
             <mat-card class="category-card" *ngFor="let category of categories">
               <img
                 mat-card-image
@@ -183,10 +186,9 @@
                     >In stock</span
                   >
                 </p>
-              </mat-card-content>
-              <mat-card-actions>
+
                 <button mat-raised-button color="primary">Add to Cart</button>
-              </mat-card-actions>
+              </mat-card-content>
             </mat-card>
           </div>
         </div>

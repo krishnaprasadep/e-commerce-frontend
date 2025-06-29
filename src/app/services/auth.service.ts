@@ -3,15 +3,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { MasterService } from '../master';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private apiUrl = 'http://127.0.0.1:5000';  // Replace with your backend API URL
+  private apiUrl = '';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private masterService: MasterService) { 
+    this.apiUrl = this.masterService.apiUrl;
+  }
 
   // Login method
   login(email: string, password: string): Observable<any> {
